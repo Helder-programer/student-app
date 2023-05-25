@@ -1,0 +1,29 @@
+<%- include('./layouts/header')%>
+
+<main class="container-fluid pt-lg-4">
+    <form action="/update/<%= studentToUpdate.id%>/?_method=put" method="post">
+        <div class="text-form">
+            <label for="" class="form-label">Name:</label>
+            <input type="text" class="form-control" name="name" value="<%= studentToUpdate.name %>" required>
+        </div>
+        <div class="text-form">
+            <label for="" class="form-label">Both Date:</label>
+            <input type="date" class="form-control" name="bothDate" value="<%= studentToUpdate.bothDate %>" required>
+        </div>
+        <div class="text-form">
+            <label for="" class="form-label">Email:</label>
+            <input type="email" class="form-control" name="email" value="<%= studentToUpdate.email %>" required>
+        </div>
+        <div class="text-form">
+            <label for="" class="form-label">Status:</label>
+            <input type="text" class="form-control" name="status" value="<%= studentToUpdate.status %>" required>
+        </div>
+        <div class="buttons d-flex gap-2 mt-2">
+            <button type="submit" class="btn btn-success">Edit</button>
+            <a href="/" class="btn btn-danger">Cancel</a>
+        </div>
+    </form>
+</main>
+
+
+<%- include('./layouts/footer')%>

@@ -1,0 +1,42 @@
+<%- include('./layouts/header')%>
+<main class="container-fluid pt-lg-4">
+    <div class="buttons row">
+        <div class="col-md-auto">
+            <a href="/create" class="btn btn-primary">Cadastrar</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead class="text-center">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Both Date</th>
+            <th>E-mail</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </thead>
+
+        <tbody class="text-center">
+            <% students.forEach(student => { %>
+                <tr>
+                    <td><%= student.id %></td>
+                    <td><%= student.name %></td>
+                    <td><%= student.bothDate %></td>
+                    <td><%= student.email %></td>
+                    <td><%= student.status %></td>
+                    <td>
+                        <a href="/update/<%=student.id%>">
+                            <i class="fa-solid fa-pen-to-square text-warning"></i>
+                        </a>
+                        <a href="/delete/<%= student.id %>?_method=delete">
+                            <i class="fa-solid fa-trash text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</main>
+
+
+<%- include('./layouts/footer')%>

@@ -21,7 +21,7 @@
                 <tr>
                     <td><%= student.id %></td>
                     <td><%= student.name %></td>
-                    <td><%= student.bothDate %></td>
+                    <td><%= moment(student.bothDate).format('DD/MM/YYYY') %></td>
                     <td><%= student.email %></td>
                     <td><%= student.status %></td>
                     <td>

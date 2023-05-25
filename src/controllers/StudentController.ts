@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express';
+import moment from 'moment';
+
 import { StudentRepository } from '../repositories/student/StutentRepository';
 
 class StudentController {
 
     public async index(req: Request, res: Response) {
         const students = await StudentRepository.findAll();
-        res.render('index', { students });
+        res.render('index', { students, moment });
     }
 
     public async showNew(req: Request, res: Response) {

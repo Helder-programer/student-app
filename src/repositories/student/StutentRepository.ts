@@ -1,54 +1,40 @@
-import { database } from "../../database";
-import { Student } from "../../entities/student/Student";
+import { Student } from "../../models/student/Student";
 import { ICreateStudentDTO } from "./dtos/ICreateStudentDTO";
 import { IUpdateStudentDTO } from "./dtos/IUpdateStudentDTO";
 
 export class StudentRepository {
-    private static getNextId() {
-        let nextId = 1;
-        const lastStudent = database[database.length - 1];
-        if (lastStudent)
-            return nextId = lastStudent.id + 1;
-        return nextId;
-    }
 
     public static async create({ name, bothDate, email, status }: ICreateStudentDTO) {
-        const nextId = this.getNextId();
-        const student = new Student(nextId, name, bothDate, email, status);
-        database.push(student);
+        const newStudent = Student.build({ name, both_date: bothDate, email, status });
+        await newStudent.save();
     }
 
     public static async findAll() {
-        const students = database;
+        const students = await Student.findAll();
         return students;
     }
 
 
     public static async findById(id: number) {
-        const searchedStudent = database.find(student => student.id === id);
-        return searchedStudent;
+        const searchedStudent = await Student.findByPk(id);
+        if (searchedStudent)
+            return searchedStudent;
+        else
+            throw new Error('Estudante não encontrado!');
     }
 
     public static async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {
-        const studentToUpdate = await this.findById(id);
-        if (studentToUpdate) {
-            studentToUpdate.name = name;
-            studentToUpdate.bothDate = bothDate;
-            studentToUpdate.email = email;
-            studentToUpdate.status = status;
-        } else {
-            throw new Error('Problema ao editar usuário');
-        }
+        const studentToUpdate = await StudentRepository.findById(id);
+
+        studentToUpdate.name = name;
+        studentToUpdate.both_date = bothDate;
+        studentToUpdate.email = email;
+        studentToUpdate.status = status;
     }
 
-
     public static async remove(id: number) {
-        const studentToDelete = await this.findById(id);
+        const studentToDelete = await StudentRepository.findById(id);
 
-        if (studentToDelete) {
-            database.splice(database.indexOf(studentToDelete), 1);   
-        } else {
-            throw new Error('Problema ao deletar usuário');
-        }
+        studentToDelete.destroy();
     }
 }

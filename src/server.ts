@@ -1,7 +1,7 @@
 import express from 'express';
 import methodOverride from 'method-override';
-
 import router from './routes/students';
+import './database/index';
 const app = express();
 
 

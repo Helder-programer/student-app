@@ -30,6 +30,8 @@ export class StudentRepository {
         studentToUpdate.both_date = bothDate;
         studentToUpdate.email = email;
         studentToUpdate.status = status;
+
+        studentToUpdate.save();
     }
 
     public static async remove(id: number) {

@@ -1,10 +1,14 @@
+import { Op } from "sequelize";
+
 import { Student } from "../../models/student/Student";
 import { ICreateStudentDTO } from "./dtos/ICreateStudentDTO";
+import { ISearchStudentDTO } from "./dtos/ISearchStudentDTO";
 import { IUpdateStudentDTO } from "./dtos/IUpdateStudentDTO";
 
 export class StudentRepository {
 
     public static async create({ name, bothDate, email, status }: ICreateStudentDTO) {
+        bothDate =  bothDate.replace(/-/g, '\/');
         const newStudent = Student.build({ name, both_date: bothDate, email, status });
         await newStudent.save();
     }
@@ -25,6 +29,7 @@ export class StudentRepository {
 
     public static async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {
         const studentToUpdate = await StudentRepository.findById(id);
+        bothDate =  bothDate.replace(/-/g, '\/');
 
         studentToUpdate.name = name;
         studentToUpdate.both_date = bothDate;
@@ -38,5 +43,11 @@ export class StudentRepository {
         const studentToDelete = await StudentRepository.findById(id);
 
         studentToDelete.destroy();
+    }
+
+
+    public static async searchStudents({ name }: ISearchStudentDTO) {
+        const searchedStudents = await Student.findAll({ where: { name: { [Op.like]: `%${name}%` } } });
+        return searchedStudents;
     }
 }

@@ -1,8 +1,19 @@
 <%- include('./layouts/header')%>
-<main class="container-fluid pt-lg-4">
+<main class="container pt-lg-4">
     <div class="buttons row">
         <div class="col-md-auto">
-            <a href="/create" class="btn btn-primary">Cadastrar</a>
+            <a href="/create" class="btn btn-primary">New</a>
+        </div>
+        <div class="col-md-5">
+            <form action="">
+                <div class="d-flex gap-3 align-items-center">
+                    <input type="text" class="form-control" name="searchedName" placeholder="Search Student..." autocomplete="off" value="<%= searchedName %>">
+                    <div id="search-buttons" class="d-flex gap-2">
+                        <button type="submit" class="btn-bg-transparent"><i class="fa-solid fa-magnifying-glass fs-5"></i></button>
+                        <button class="btn-bg-transparent" onclick="window.location.replace('/')" type="button"><i class="fa-solid fa-broom text-warning fs-5"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -21,7 +32,7 @@
                 <tr>
                     <td><%= student.id %></td>
                     <td><%= student.name %></td>
-                    <td><%= moment(student.bothDate).format('DD/MM/YYYY') %></td>
+                    <td><%= moment(student.both_date).format('DD/MM/YYYY') %></td>
                     <td><%= student.email %></td>
                     <td><%= student.status %></td>
                     <td>

@@ -1,25 +1,32 @@
 <%- include('./layouts/header')%>
 
 <main class="container-fluid pt-lg-4">
-    <form action="/update/<%= studentToUpdate.id%>/?_method=put" method="post">
+    <form action="/update/<%= studentToUpdate.id%>/?_method=put" method="post" class="col-md-4">
         <div class="text-form">
             <label for="" class="form-label">Name:</label>
-            <input type="text" class="form-control" name="name" value="<%= studentToUpdate.name %>" required>
+            <input type="text" class="form-control" name="name" value="<%= studentToUpdate.name %>" required autocomplete="off">
         </div>
         <div class="text-form">
             <label for="" class="form-label">Both Date:</label>
-            <input type="date" class="form-control" name="bothDate" value="<%= studentToUpdate.bothDate %>" required>
+            <input 
+                type="date" 
+                class="form-control" 
+                name="bothDate" 
+                value="<%= new Date(studentToUpdate.both_date).toISOString().slice(0,10) %>" 
+                required 
+                autocomplete="off"
+            >
         </div>
         <div class="text-form">
             <label for="" class="form-label">Email:</label>
-            <input type="email" class="form-control" name="email" value="<%= studentToUpdate.email %>" required>
+            <input type="email" class="form-control" name="email" value="<%= studentToUpdate.email %>" required autocomplete="off">
         </div>
         <div class="text-form">
             <label for="" class="form-label">Status:</label>
-            <input type="text" class="form-control" name="status" value="<%= studentToUpdate.status %>" required>
+            <input type="text" class="form-control" name="status" value="<%= studentToUpdate.status %>" required autocomplete="off">
         </div>
         <div class="buttons d-flex gap-2 mt-2">
-            <button type="submit" class="btn btn-success">Edit</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a href="/" class="btn btn-danger">Cancel</a>
         </div>
     </form>

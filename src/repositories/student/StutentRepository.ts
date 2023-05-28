@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 
-import { Student } from "../../models/student/Student";
+import { Student } from "../../models/Student";
 import { ICreateStudentDTO } from "./dtos/ICreateStudentDTO";
 import { ISearchStudentDTO } from "./dtos/ISearchStudentDTO";
 import { IUpdateStudentDTO } from "./dtos/IUpdateStudentDTO";

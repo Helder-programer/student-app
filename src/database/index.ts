@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import { Student } from "../models/student/Student";
+import { Student } from "../models/Student";
 
 const connection = new Sequelize({
     dialect: 'sqlite',

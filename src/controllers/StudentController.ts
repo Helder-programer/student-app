@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import moment from 'moment';
 
-import { Student } from '../models/student/Student';
+import { Student } from '../models/Student';
 import { StudentRepository } from '../repositories/student/StutentRepository';
 
 class StudentController {

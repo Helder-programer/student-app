@@ -1,4 +1,4 @@
-import { Student } from "../../../models/student/Student";
+import { Student } from "../../../models/Student";
 
 export interface IUpdateStudentDTO {
     id: number;

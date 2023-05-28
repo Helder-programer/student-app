@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
 
-import { IStudent } from '../../interfaces/IStudent';
+import { IStudent } from '../interfaces/IStudent';
 
 
 export class Student extends Model implements IStudent {

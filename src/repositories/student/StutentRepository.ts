@@ -1,25 +1,27 @@
 import { Op } from "sequelize";
 
+
+import { IStudentRepository } from "../../interfaces/IStudentRepository";
 import { Student } from "../../models/Student";
 import { ICreateStudentDTO } from "./dtos/ICreateStudentDTO";
 import { ISearchStudentDTO } from "./dtos/ISearchStudentDTO";
 import { IUpdateStudentDTO } from "./dtos/IUpdateStudentDTO";
 
-export class StudentRepository {
+export class StudentRepository implements IStudentRepository {
 
-    public static async create({ name, bothDate, email, status }: ICreateStudentDTO) {
+    public async create({ name, bothDate, email, status }: ICreateStudentDTO): Promise<void> {
         bothDate =  bothDate.replace(/-/g, '\/');
         const newStudent = Student.build({ name, both_date: bothDate, email, status });
         await newStudent.save();
     }
 
-    public static async findAll() {
+    public async findAll() {
         const students = await Student.findAll();
         return students;
     }
 
 
-    public static async findById(id: number) {
+    public async findById(id: number) {
         const searchedStudent = await Student.findByPk(id);
         if (searchedStudent)
             return searchedStudent;
@@ -27,8 +29,8 @@ export class StudentRepository {
             throw new Error('Estudante não encontrado!');
     }
 
-    public static async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {
-        const studentToUpdate = await StudentRepository.findById(id);
+    public async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {
+        const studentToUpdate = await this.findById(id);
         bothDate =  bothDate.replace(/-/g, '\/');
 
         studentToUpdate.name = name;
@@ -39,14 +41,14 @@ export class StudentRepository {
         studentToUpdate.save();
     }
 
-    public static async remove(id: number) {
-        const studentToDelete = await StudentRepository.findById(id);
+    public async remove(id: number) {
+        const studentToDelete = await this.findById(id);
 
         studentToDelete.destroy();
     }
 
 
-    public static async searchStudents({ name }: ISearchStudentDTO) {
+    public async searchStudents({ name }: ISearchStudentDTO) {
         const searchedStudents = await Student.findAll({ where: { name: { [Op.like]: `%${name}%` } } });
         return searchedStudents;
     }

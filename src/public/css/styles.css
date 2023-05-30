@@ -1,4 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300&display=swap');
+
+
+* {
+    font-family: 'Poppins';
+}
+
 .btn-bg-transparent {
     background-color: transparent;
     border: none;
+}
+
+
+.error-container {
+    height: calc(100vh - 57px);
 }

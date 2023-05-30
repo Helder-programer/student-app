@@ -1,4 +1,5 @@
 import { Op } from "sequelize";
+import { ApiError } from "../../helpers/apiError";
 
 
 import { IStudentRepository } from "../../interfaces/IStudentRepository";
@@ -26,7 +27,7 @@ export class StudentRepository implements IStudentRepository {
         if (searchedStudent)
             return searchedStudent;
         else
-            throw new Error('Estudante não encontrado!');
+            throw new ApiError('Student not found!', 400);
     }
 
     public async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {

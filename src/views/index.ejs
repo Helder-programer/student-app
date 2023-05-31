@@ -29,7 +29,7 @@
 
         <tbody class="text-center">
             <% students.forEach(student => { %>
-                <tr>
+                <tr class="<%= student.status == 'Aprovado' ? 'text-success' : 'text-danger' %>">
                     <td><%= student.id %></td>
                     <td><%= student.name %></td>
                     <td><%= moment(student.both_date).format('DD/MM/YYYY') %></td>

@@ -22,7 +22,7 @@ export class StudentRepository implements IStudentRepository {
     }
 
 
-    public async findById(id: number) {
+    public async findById(id: number): Promise<Student> {
         const searchedStudent = await Student.findByPk(id);
         if (searchedStudent)
             return searchedStudent;
@@ -42,14 +42,14 @@ export class StudentRepository implements IStudentRepository {
         studentToUpdate.save();
     }
 
-    public async remove(id: number) {
+    public async remove(id: number): Promise<void> {
         const studentToDelete = await this.findById(id);
 
         studentToDelete.destroy();
     }
 
 
-    public async searchStudents({ name }: ISearchStudentDTO) {
+    public async searchStudents({ name }: ISearchStudentDTO): Promise<Student[]> {
         const searchedStudents = await Student.findAll({ where: { name: { [Op.like]: `%${name}%` } } });
         return searchedStudents;
     }

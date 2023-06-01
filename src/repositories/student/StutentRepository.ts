@@ -27,7 +27,7 @@ export class StudentRepository implements IStudentRepository {
         if (searchedStudent)
             return searchedStudent;
         else
-            throw new ApiError('Student not found!', 400);
+            throw new ApiError('Student not found!', 404);
     }
 
     public async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {

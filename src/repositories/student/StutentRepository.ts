@@ -30,7 +30,7 @@ export class StudentRepository implements IStudentRepository {
             throw new ApiError('Student not found!', 404);
     }
 
-    public async update({ id, name, bothDate, email, status }: IUpdateStudentDTO) {
+    public async update({ id, name, bothDate, email, status }: IUpdateStudentDTO): Promise<void> {
         const studentToUpdate = await this.findById(id);
         bothDate =  bothDate.replace(/-/g, '\/');
 
@@ -39,7 +39,7 @@ export class StudentRepository implements IStudentRepository {
         studentToUpdate.email = email;
         studentToUpdate.status = status;
 
-        studentToUpdate.save();
+        await studentToUpdate.save();
     }
 
     public async remove(id: number): Promise<void> {
